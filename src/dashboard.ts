@@ -1,22 +1,25 @@
-import {Indicator, Ignition, FuelIndicator, Tank} from '.';
+import {Tank} from '.';
+import {Inject, Resolvable} from '../../di/src/inject';
 
-export class Dashboard {
+@Inject('ignition', 'indicator', 'fuelIndicator')
+export class Dashboard implements Resolvable {
     private $root = document.createElement('div');
 
-    constructor(
-        private ignition: Ignition,
-        private indicator: Indicator,
-        private fuelIndicator: FuelIndicator
-    ) {
-        [indicator, fuelIndicator, ignition]
-            .forEach(part => this.$root.appendChild(part.$root));
-
-        indicator.update('silnik wylaczony');
-
+    constructor() {
         document.body.appendChild(this.$root);
     }
 
+    resolved() {
+        const { indicator, fuelindicator, ignition } = this;
+        console.log(this);
+
+        [indicator, fuelindicator, ignition]
+            .forEach(part => this.$root.appendChild(part.$root));
+
+        indicator.update('silnik wylaczony');
+    }
+
     update(tank: Tank) {
-        this.fuelIndicator.update(tank);
+        this.fuelindicator.update(tank);
     }
 }

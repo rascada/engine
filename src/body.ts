@@ -1,9 +1,4 @@
-import {Dashboard, Engine, Wheel, Tank} from '.';
+import {Inject} from '../../di/src/inject';
 
-export class Body {
-    constructor(
-        private dashboard: Dashboard,
-        private engine: Engine,
-        private tank: Tank,
-        private wheels: Wheel[] = []) { }
-}
+@Inject('dashboard', { class: 'engine', args: [67]}, 'tank', 'wheel')
+export class Body {}

@@ -9,7 +9,6 @@ export class Indicator {
 }
 
 export class FuelIndicator extends Indicator {
-    //noinspection JSAnnotator
     update(tank: Tank) {
         const { $root } = this;
 
